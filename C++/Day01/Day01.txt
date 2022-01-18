@@ -1,0 +1,63 @@
+yoonkwanghee1225@naver.com
+
+
+public
+private
+protected
+
+-> 멤버 변수를 위해 사용
+
+header file
+1. c / c++ 에서 제공하는 파일 -> c: #include <stdio.h>, c++: <iostream>
+2. 사용자 정의 헤더 파일 -> #include "myheader.h"
+
+<> --> given from the system
+
+        0113.c
+        myHeader.h
+
+# --> 0순위로 설정; #define이 먼저 사용 될 수 있다
+
+#define이 어떤 방식으로 사용되느냐의 따라 우선순위가 달라진다
+
+//헤더 파일 --> myHeader.h
+#paragma once // c에서는 사용 안함
+#include<stdio.h>
+void func1(int);
+void func2(int);
+
+
+//소스 파일1 -> 0113.c --> main function
+//#include<stdio.h>
+#include"myHeader.h"
+
+int main(void) {
+    func1();
+    func2();
+    return 0;
+}
+
+//소스 파일 2 -> func1.c
+#include"myHeader.h"
+
+void func1() {
+    printf("func1() 호출\n");
+}
+
+
+//소스 파일 3 -> func2.c
+#include"myHeader.h"
+
+void func2() {
+    printf("func1() 호출\n");
+}
+
+
+
+//
+#include<iostream>
+
+int main(void) {
+    std::cout << "Hello, C++" << std::endl; //:: scope연산자, cout-> return ; print.out,in 
+    return 0;
+}

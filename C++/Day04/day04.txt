@@ -1,0 +1,41 @@
+Class
+
+object : 정적 객체
+
+    생성자
+
+        struct score {
+            int kor;
+            int eng;
+            int math;
+        };
+
+
+        int main(void) {
+            struct score socre1 = { 90, 80, 70};
+            struct score *ps = &score1;
+
+            printf("국어 : %d\n", (*ps).kor);        접근
+            printf("영어 : %d\n", ps -> eng);
+            printf("수학 : %d\n", ps -> math);
+            return 0;
+        }
+
+
+
+
+
+
+클래스
+    객체 : 멤버 필드(변수), 멤버 함수(행동)
+객체 : 멤버 필드(변수), 멤버 함수(행동)
+객체 : 멤버 필드(변수), 멤버 함수(행동)
+객체 : 멤버 필드(변수), 멤버 함수(행동)
+객체 : 멤버 필드(변수), 멤버 함수(행동)
+객체 : 멤버 필드(변수), 멤버 함수(행동)
+    
+:: scope 연산자
+
+클래스 안에 있는 함수들을 다 모아놓은 후 클래스 밖에서 스코프 연산자를 활용해 Listing을 해 놓는다.
+--> className :: 함수(){} 를 활용해 함수가 다시 class로 갈 수 있도록 해준다.
+
