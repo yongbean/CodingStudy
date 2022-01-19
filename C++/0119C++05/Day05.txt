@@ -1,0 +1,134 @@
+Class
+
+//class1.cpp
+class CName : public CFamily // 상속
+-->자식 class,  --> 부모 class
+부모 class가 자식 class에게 :을 활용해서 상속을 해준다.
+
+
+
+접근 지정자
+1. private (default) (완전 비공개)
+2. protected (경우에 따라 멤버가 숨겨진다. 상속관계에서 사용)
+3. public (외부에 클래스 멤버 공개)
+
+
+        class 자식 클래스 : 부모 클래스
+
+        부모 클래스 : 멤버 필드 / 멤버 메소드
+
+        자식 클래스 : 멤버 필드 / 멤버 메소드 
+
+            상속관계 :=> 새로운 클래스가 생성된다.
+
+        상속 관계 --> is a 관계가 되어야 한다
+
+        is a / has a
+
+        관계도 --> 자식 to 부모 
+
+
+casting --> 변환
+ex) (int)float
+
+    UpCasting   : 자식 to 부모 --> is a 관계
+        자식 class가 부모 class처럼 사용할 때
+            user가 볼때 이렇게 보인다.
+
+    DownCasting : 부모 to 자식
+
+
+
+부모 : Ani
+자식 : Dog
+
+
+        class Dog : public Ani{
+        
+        Dog dog = Ani(); --> UpCasting
+        }
+
+
+
+        private : 상속 관계에서 자식이 부모 멤버 필드 접그 허용 (X)
+
+
+        classA {
+
+
+        };
+
+        classB {
+
+
+        };
+        class1 {
+
+
+        };
+
+        classA : public class1 {
+
+        };
+
+        int main(void) {
+
+        }
+
+
+is a 관계만 성립되면 부모 class가 될 수 있고 자식 class가 될 수 있다.
+
+interface
+
+    켑슐화
+        객체와 객체의 동립성을 
+
+
+
+//class2.cpp
+    구조체와 클래스의 유사점들을 보여주는 형식
+//struct STest s1;
+구조체의 테그명
+--> 구조체의 이름 STest
+--> 구조체의 구객체 s1
+
+
+//class3.cpp
+
+클래스와 구조체를 비교해주는 예시
+
+구조체 --> 사용자 정의 데이터형
+    누구나 접근 가능
+     
+즉 class와 반대된다.
+
+//class4.cpp
+c에서 static의 특징
+    전역변수처럼 사용할 수 있다.
+    즉 사라지지 않는다
+
+
+//class5.cpp
+CTest() --> 생성자
+
+CTest() : m_C1(1) {
+
+	}
+    m_C1을 1로 초기화
+
+    const --> 한정자 : 직접 초기화 해주어야 한다 필수적으로
+                     대입을 통해서 값을 변경할 수 없다.
+        대입을 초기화해준다
+
+const int m_C2 = 2; //2로 초기화 --> 클래스 내부 초기화
+
+
+//class6.cpp
+
+static선언과 non-static 선언 멤버에 대한 클래스 정의 내부 초기화
+
+const가 붙을 경우 static이 붙어 있어도 class내부에서 선언을 바로 할 수 있다.
+static 선언일 경우 내부에서는 선언을 하지 못하고 외부에서 무조건 선언을 해야한다.
+
+//class7.cpp
+
