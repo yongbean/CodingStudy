@@ -1,0 +1,137 @@
+//class7.cpp
+
+this (pointer)
+
+    class Sample {
+    public:
+        ...
+        void showTest();
+        ...
+    private:
+        int test;
+        ...
+    };
+
+
+멤버 함수 showTest() 정의 하는 방법
+    1. 멤버가 누구의 것이냐 (class or not)
+    
+    void Sample::showTest{
+        cout << test;   <--> cout << (this->)test; // 같은 내용
+    }
+
+    void Sample::showTest{
+        cout << this -> test;
+    }
+
+this pointer 연산자 --> 객체를 가르키는 pointer 이름 => this
+    this ==> 호출하는 객체를 가르키는 포인터 이름이다.
+         ==> 호출하는 객체의 이름 (X)
+         ==> 객체가 아니다
+
+
+void Sample::setValue(double inValue) {
+    mValue = inValue;
+}
+void Sample::setValue(double value) {
+    value = value;
+}
+
+즉,
+void Sample::setValue(double value) {
+    this -> value = value;
+}
+
+멤버 함수가 호출될 때 this가 hidden으로 항상 따라 들어온다
+
+this 미사용시 에러 발생
+
+
+JAVA --> this.a
+c++  --> this -> a
+
+즉 this pointer이다.
+
+
+
+
+#include<iostream>
+#namespace "        .h"
+Circle::Circle() { //생성자
+    radius = 1;
+}
+Circle::Circle(double radius) {
+    this->radius = radius; //(*this).radius = radius
+    //객체에 있는 radius 데이터필드를 참조하기 위하여 this->를 사용한다.
+}
+
+double Circle::getArea() {
+    return radius * radius * 3.14159;
+}
+
+double Circle::getArea() {
+    return radius;
+}
+
+void Circle::setRadius(double radius) {
+    this->radius = (radius >= 0) ? radius : 0; //3중 if문
+}
+
+멤버 함수는 클래스 객체에 의해서 공유 가능하다
+
+클래스에는 한개 이상의 객체가 존재한다
+
+클래스가 가지고 있는 멤버 함수는 객체에 의해서 공유(호출) 된다.
+
+멤버 함수는 누가(어느 객체가) 호출을 했는지를 알아야한다 즉, .으로 엮는다.
+
+호출자(객체)의 주소를 알려주지 않는다
+
+즉 누가 호출했는지를 알기 위해 객체의 주소를 알려준다 --> this가 호출자(객체)의 주소를 알려준다.
+
+
+//class8.cpp
+
+.  : 직접 멤버 연산자 접근
+-> : 간접 멤버 연산자 접근
+
+//class9.cpp
+
+this는 NULL을 기르킨다. --> NULL은 값이 없기 때문에 출력을 하려고할 때 그냥 0을 반환한다.
+
+//class10.cpp
+정적 멤버 필드
+
+정적 /const
+
+static const
+
+정적 멤버 데이터
+
+정적 멤버 함수 -> c++에서는 전역 함수라고 칭한다.
+
+멤버 함수의 기준은 클래스의 객체이다
+
+정적 멤버 함수는 객체를 기준으로 호출하지 않는다
+this를 사용하지 못한다. (함수 내부에서 this를 사용하지 않는다.)
+
+즉,
+
+정적 멤버 함수는 객체의 멤버에 접근 불가능하다.
+
+정적 멤버 함수는 클래스 소속의 함수 
+--> 제한을 둔다.
+
+//class11.cpp
+
+정적 멤버 함수 사용법 3가지
+1.  CTest t;
+    t.SFunc();      
+    
+2.  CTest* pT = &t;
+    pT->SFunc();   
+
+3.  CTest::SFunc(); --> 가장 좋다
+
+// class12.cpp
+
