@@ -1,0 +1,131 @@
+c++ : 
+    1. private
+        외부 함수에 자기 자신의 멤버 접근 가능하지 않도록 숨긴다.(은닉화)
+    2. protected
+        외부함수에 자기 자신의 멤버 접근 가능하지 않도록 숨긴다.
+        그러나 파생(자식) 클래스의 멤버 함수에 대해서는 접근 가능하게 한다.
+    3. public
+        외부 함수에 자기 자신의 멤버를 접근 가능하게 한다.
+
+
+protected : 외부 함수에게는 비공개
+            상속(파생) 관계에서는 파생 클래스의 멤버 함수에게는 공개
+            
+            protected는 public에 가깝다고 이야기 한다.
+
+
+************ 상속 접근 지정자도 멤버 접근 지정자와 같다.
+             생략할 경우 기본은 private이다.
+
+```c++
+#include <iostream>
+
+class CTest {
+public: // 영역 표현
+    void Func() {
+        m_Public++;
+        m_Protected++;
+        m_Private++;
+    }
+    int m_Public = 1; // private / public --> 아직 public에 속한다
+    
+protected:
+    int m_Protected = 2;
+    
+private:
+    int m_Private = 3;
+    
+};
+
+class CChild : public CTest {
+public:
+    void Func() {
+    m_Public++;
+    m_Protected++;
+    m_Private++; //부모 클래스에 있는 것이기 때문에 접근 불가 --> 은닉화
+    }
+};
+
+int main(int argc, const char * argv[]) {
+    CTest t;
+    t.m_Public++;   // 괜찮다
+    t.m_Protected++;// error --> main은 상속이 아니기 때문
+    t.m_Private++;  // error --> 은닉화가 되어서 가져올 수 없다
+    return 0;
+}
+```
+
+```c++
+#include <iostream>
+
+class CTest {
+public: // 영역 표현
+    void Func() {
+        m_Public++;
+        m_Protected++;
+        m_Private++;
+    }
+    int m_Public = 1; // private / public --> 아직 public에 속한다
+    
+protected:
+    int m_Protected = 2;
+    
+private:
+    int m_Private = 3;
+    
+};
+
+class CChild : protected CTest {
+public:
+    void Func() {
+    m_Public++;     // ok
+    m_Protected++;  // ok
+    m_Private++;    //부모 클래스에 있는 것이기 때문에 접근 불가 --> 은닉화 --> Error
+    }
+};
+
+int main(int argc, const char * argv[]) {
+    CChild c; //--> protected class에서 Inherit를 헀기 때문에 다 error뜬다
+    c.m_Public++;   //error
+    c.m_Protected++;//error
+    c.m_Private++;  //error
+    return 0;
+}
+
+
+// CChild& c = (CChild&)t;
+```
+
+
+1. 접근 지정자에 의해 클래스 멤버에 private이 지정되어 있으면 외부 함수에서 해당 멤버에 접근할 수 없다.
+2. protected 역시 파생 클래스의 멤버 함수를 제외하고서는 외부 함수에서 해당 멤버에 접근할 수 없다.
+
+
+friend --> private과 protected를 접근할 수 있다
+
+    c++ 상속 되지 않는 함수가 존재
+    생성자, 소멸자
+    + 대입 연산자 함수
+
+class CParent {
+public:
+    CParent(int arg) {
+
+    }
+};
+
+class CTest : public CParent {
+
+};
+
+void main() {
+    CParent p(0);
+    CTest t(0);     // error
+}
+
+
+1. 복사 생성자
+2. 다중 상속 (c++ only)
+    --> 다이아몬드 구조 --> 중복된다
+        --> 파생된것 --> 가상 기저 클래스 (중복을 피하기 위해 만들어짐) , 가상 기저 클래스 의 생성자도 존재
+
